@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="bower_components/requirejs/require.js"></script>
+<script>
+
+</script>
+<script>
+require.config({
+	paths : {
+		"promise": "bower_components/requirejs-promise/requirejs-promise",
+		"jquery": "bower_components/jquery/dist/jquery.min",
+		"underscore": "bower_components/underscore/underscore-min", 
+		"underscore.string": "bower_components/underscore.string/dist/underscore.string.min"
+	}
+});
+
+require(["promise!lib/dictionary"], function(words) {
+	console.debug(words.slice(0, 5));
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>
