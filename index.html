@@ -4,13 +4,19 @@
 <meta charset="UTF-8">
 <script src="bower_components/requirejs/require.js"></script>
 <script>
-var pl_PL = "data/dictionary.pl_PL.utf8.txt";
+//select?
+var url = "txt/dictionary.pl_PL.utf8.txt";
 
-function array2function(a) {
-	return function(i) {
-		return a[i];
-	};
-}
+// constant
+var size = 4;
+
+// parse?
+var letters = [
+	's', 'ł', 'r', 'e',
+	'g', 'o', 'w', 'p',
+	'k', 'r', 'u', 'o',
+	'a', 'o', 't', 's'
+];
 </script>
 <script>
 require.config({
@@ -22,10 +28,33 @@ require.config({
 });
 
 require(["lib/data", "lib/dictionary", "lib/board"], function(Data, Dictionary, Board) {
+	var letter = function(index) {
+		return letters[index];
+	};
+	
+	var word = function(array) {
+		return array.map(letter).join("");
+	};
+	
+	Data.load(url).then(function(words) {
+		var board = new Board(size);
+		var dictionary = new Dictionary(words);
+		var callback = function(array) {
+			var string = word(array);
+			if (dictionary.containsPrefix(string)) {
+				if (dictionary.containsWord(string)) {
+					console.debug(string, array);
+				}
+				return true;
+			} else {
+				return false;
+			}
+		};
+		board.search(callback);
+	});
 });
 </script>
 </head>
 <body>
-
 </body>
 </html>
