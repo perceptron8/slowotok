@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <script src="bower_components/requirejs/require.js"></script>
 <script>
+var pl_PL = "data/dictionary.pl_PL.utf8.txt";
+
 function array2function(a) {
 	return function(i) {
 		return a[i];
@@ -13,24 +15,13 @@ function array2function(a) {
 <script>
 require.config({
 	paths : {
-		"promise": "bower_components/requirejs-promise/requirejs-promise",
 		"jquery": "bower_components/jquery/dist/jquery",
 		"underscore": "bower_components/underscore/underscore", 
 		"underscore.string": "bower_components/underscore.string/lib/underscore.string"
 	}
 });
 
-// require(["promise!lib/words"], function(words) {});
-
-function callback(array) {
-	// TODO
-	console.debug(array);
-	return array.length <= 2;
-}
-
-require(["lib/board"], function(Board) {
-	var board = new Board(4);
-	board.search(callback);
+require(["lib/data", "lib/dictionary", "lib/board"], function(Data, Dictionary, Board) {
 });
 </script>
 </head>
