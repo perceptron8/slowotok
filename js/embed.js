@@ -16,5 +16,6 @@ $("body").on("keydown", function(event) {
 				checkWord(word);
 			}
 		});
+		return false;
 	}
 });
