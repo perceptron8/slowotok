@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Slowotok",
+  "version": "0.0.1",
+  "description": "Plays slowotok.pl",
+  "author": "perceptron8",
+  "icons": { "48": "img/icon.png" },
+  "browser_action": {
+    "default_title": "Slowotok",
+    "default_icon": "img/icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["https://slowotok.pl/play"],
+    "js": ["lib/jquery.js","js/content.js"]
+  }],
+  "web_accessible_resources": ["txt/words.txt", "js/embed.js"]
+}
