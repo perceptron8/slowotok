@@ -1,21 +1,25 @@
-var words = {};
+const words = {};
 
-$.get($("link[type='text/plain']").attr("href")).then(function(response) {
-	response.split("\n").forEach(function(line) {
-		var word = line.toUpperCase();
-		var hash = hex_md5(word);
+(async () => {
+	const url = document.querySelector("link:last-child").href;
+	const response = await fetch(url);
+	const text = await response.text();
+	for (const line of text.split("\n")) {
+		const word = line.toLocaleUpperCase();
+		const hash = hex_md5(word);
 		words[hash] = word;
-	});
-});
+	}
+})();
 
-$("body").on("keydown", function(event) {
-	if (event.which == 118) { // F7
-		gl_words.forEach(function(hash) {
-			var word = words[hash];
+document.body.addEventListener("keydown", (event) => {
+	if (event.key === "F7") {
+		for (const hash of gl_words) {
+			const word = words[hash];
 			if (word) {
+				gl_letters = word;
 				checkWord(word);
 			}
-		});
-		return false;
+		}
+		event.preventDefault();
 	}
 });

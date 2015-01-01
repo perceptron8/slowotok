@@ -1,17 +1,34 @@
 {
   "manifest_version": 2,
+  "minimum_chrome_version": "50",
+  
   "name": "Slowotok",
-  "version": "0.0.1",
-  "description": "Plays slowotok.pl",
+  "short_name": "Slowotok",
   "author": "perceptron8",
-  "icons": { "48": "img/icon.png" },
+  "description": "slowotok.pl playing bot",
+  "homepage_url": "https://github.com/perceptron8/slowotok",
+  "version": "0.0.1",
+  
+  "icons": {
+    "48": "img/icon.png"
+  },
+  
   "browser_action": {
     "default_title": "Slowotok",
-    "default_icon": "img/icon.png"
+    "default_icon": {
+      "48": "img/icon.png"
+    }
   },
+  
   "content_scripts": [{
     "matches": ["https://slowotok.pl/play"],
-    "js": ["lib/jquery.js","js/content.js"]
+    "js": [
+      "js/content.js"
+     ]
   }],
-  "web_accessible_resources": ["txt/words.txt", "js/embed.js"]
+  
+  "web_accessible_resources": [
+  	"js/embed.js",
+    "txt/words.txt"
+   ]
 }
