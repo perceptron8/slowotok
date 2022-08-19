@@ -1,6 +1,6 @@
 {
-  "manifest_version": 2,
-  "minimum_chrome_version": "50",
+  "manifest_version": 3,
+  "minimum_chrome_version": "100",
   
   "name": "Slowotok",
   "short_name": "Slowotok",
@@ -13,7 +13,7 @@
     "48": "img/icon.png"
   },
   
-  "browser_action": {
+  "action": {
     "default_title": "Slowotok",
     "default_icon": {
       "48": "img/icon.png"
@@ -21,14 +21,21 @@
   },
   
   "content_scripts": [{
-    "matches": ["https://slowotok.pl/play"],
+    "matches": [
+      "https://slowotok.pl/play"
+    ],
     "js": [
       "js/content.js"
      ]
   }],
   
-  "web_accessible_resources": [
-  	"js/embed.js",
-    "txt/words.txt"
-   ]
+  "web_accessible_resources": [{
+    "matches": [
+      "<all_urls>"
+    ],
+    "resources": [
+      "js/embed.js",
+      "txt/words.txt"
+    ]
+   }]
 }
