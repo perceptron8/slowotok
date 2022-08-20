@@ -1,1 +1,3 @@
-/bower_components/
+target/
+pkg/
+Cargo.lock

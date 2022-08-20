@@ -35,7 +35,8 @@
     ],
     "resources": [
       "js/embed.js",
-      "txt/words.txt"
+	  "pkg/slowotok.js",
+	  "pkg/slowotok_bg.wasm"
     ]
    }]
 }
