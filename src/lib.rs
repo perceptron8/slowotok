@@ -43,7 +43,7 @@ pub fn solve(gl_boardLetters: &[[char; N]; N], gl_words: &Vec<String>) -> Vec<St
 	for word in gl_words {
 		words.insert(word.clone(), String::from(""));
 	}
-	for d in 10..16 {
+	for d in 10..N * N {
 		for r in 0..N {
 			for c in 0..N {
 				search(&gl_boardLetters, &mut words, &mut [[false; N]; N], &mut String::from(""), r, c, d);
@@ -60,7 +60,7 @@ pub fn solve(gl_boardLetters: &[[char; N]; N], gl_words: &Vec<String>) -> Vec<St
 	return solution;
 }
 
-fn search(board_letters: &[[char; N]; N], words: &mut HashMap<String, String>, grid: &mut [[bool; N]; N], word: &mut String, r: usize, c: usize, d: u8) {
+fn search(board_letters: &[[char; N]; N], words: &mut HashMap<String, String>, grid: &mut [[bool; N]; N], word: &mut String, r: usize, c: usize, d: usize) {
 	grid[r][c] = true;
 	word.push(board_letters[r][c]);
 	if words.contains_key(&hash(word)) {
