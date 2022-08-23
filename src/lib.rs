@@ -43,9 +43,14 @@ pub fn solve(gl_boardLetters: &[[char; N]; N], gl_words: &Vec<String>) -> Vec<St
 	for word in gl_words {
 		words.insert(word.clone(), String::from(""));
 	}
-	for r in 0..N {
-		for c in 0..N {
-			search(&gl_boardLetters, &mut words, &mut [[false; N]; N], &mut String::from(""), r, c);
+	for d in 10..16 {
+		for r in 0..N {
+			for c in 0..N {
+				search(&gl_boardLetters, &mut words, &mut [[false; N]; N], &mut String::from(""), r, c, d);
+			}
+		}
+		if !words.values().any(String::is_empty) {
+			break;
 		}
 	}
 	let mut solution: Vec<String> = Vec::new();
@@ -55,16 +60,18 @@ pub fn solve(gl_boardLetters: &[[char; N]; N], gl_words: &Vec<String>) -> Vec<St
 	return solution;
 }
 
-fn search(board_letters: &[[char; N]; N], words: &mut HashMap<String, String>, grid: &mut [[bool; N]; N], word: &mut String, r: usize, c: usize) {
+fn search(board_letters: &[[char; N]; N], words: &mut HashMap<String, String>, grid: &mut [[bool; N]; N], word: &mut String, r: usize, c: usize, d: u8) {
 	grid[r][c] = true;
 	word.push(board_letters[r][c]);
 	if words.contains_key(&hash(word)) {
 		words.insert(hash(word), word.clone());
 	}
-	for y in r.saturating_sub(1)..=cmp::min(r + 1, N - 1) {
-		for x in c.saturating_sub(1)..=cmp::min(c + 1, N - 1) {
-			if !grid[y][x] {
-				search(board_letters, words, grid, word, y, x);
+	if d > 0 {
+		for y in r.saturating_sub(1)..=cmp::min(r + 1, N - 1) {
+			for x in c.saturating_sub(1)..=cmp::min(c + 1, N - 1) {
+				if !grid[y][x] {
+					search(board_letters, words, grid, word, y, x, d - 1);
+				}
 			}
 		}
 	}
