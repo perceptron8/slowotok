@@ -35,8 +35,8 @@
     ],
     "resources": [
       "js/embed.js",
-	  "pkg/slowotok.js",
-	  "pkg/slowotok_bg.wasm"
+      "pkg/slowotok.js",
+      "pkg/slowotok_bg.wasm"
     ]
    }]
 }
